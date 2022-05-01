@@ -1,0 +1,37 @@
+﻿@section Scripts{ 
+<script>
+    $(document).ready(function () {
+        $("#botonLoad").click(function () {
+            var url = "http://54.204.77.196/";
+            $.ajax({
+                type: "GET",
+                url: url + "api/doctor",
+                dataType: "application/json",
+                success: function (data) {
+                    var html = "";
+                    $.each(data, function (index, doctores) {
+                        html += "<tr>";
+                        html += "<td>" + doctores.idDoctor + "</td>";
+                        html += "<td>" + doctores.apellido + "</td>";
+                        html += "<td>" + doctores.especialidad + "</td>";
+                        html += "<td>" + doctores.salario + "</td>";
+                        html += "<img src='" + doctores.imagen + "' style='width:150px;height:150px;'/>";
+                        html = "</tr>";
+                    });
+                    $("#tablaDoctores tbody").html(html);
+                }
+            });
+        });
+    });
+</script>
+}
+
+<h1>Doctores</h1>
+
+<button type="button" id="botonLoad" class="btn btn-danger">
+    Cargar
+</button>
+<table class="table table-bordered" id="tablaDoctores">
+    <thead><tr><th>Doctores</th><th>Apellidos</th><th>Especialidad</th><th>Salario</th><th>Imagen</th></tr></thead>
+    <tbody></tbody>
+</table>
