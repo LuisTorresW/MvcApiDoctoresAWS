@@ -1,3 +1,4 @@
+using Amazon.S3;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,9 @@ namespace MvcApiDoctoresAWS
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<ServiceDoctores>();
+            services.AddAWSService<IAmazonS3>();
+            services.AddTransient<ServiceS3>();
+
             services.AddControllersWithViews();
         }
 
